@@ -30,7 +30,7 @@ class GameLogic:
         counts = [0] * 7  # Initialize counts for each possible dice value
                 #  dice(5,1,5)
                 #  die            {1,2,3,4,5,6}
-                #  counts[die]    (1,0,5,0,2,0)
+                #  counts[die]    (0,0,0,0,0,0)
         # Count the occurrences of each dice value
         for die in dice:
             counts[die] += 1
@@ -42,6 +42,13 @@ class GameLogic:
             if counts[die] == 1:
                 counter += 1
             if counter == 6:
+                score += 1500
+                return score
+        counter = 0
+        for die in range(1, 7):
+            if counts[die] == 2:
+                counter += 1
+            if counter == 3:
                 score += 1500
                 return score
 
@@ -66,7 +73,7 @@ class GameLogic:
         for die in range(2, 7):
             # Score for three of a kind
             if counts[die] >= 3:
-                score += (counts[die] - 2) * 200
+                score += (counts[die] - 2) * 100* die
                 counts[die] -= 3
 
         return score
