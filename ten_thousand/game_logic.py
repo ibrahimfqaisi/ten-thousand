@@ -46,8 +46,8 @@ class GameLogic:
 
         return score
 
-    
-    def roll_dice(self ,number_of_dice):
+    @staticmethod
+    def roll_dice(number_of_dice):
         dice_roll = []
         for _ in range(number_of_dice):
             dice_roll.append(random.randint(1, 6))
