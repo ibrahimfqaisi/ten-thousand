@@ -1,29 +1,21 @@
 import random
-
-
 class GameLogic:
     """
     A class representing game logic for a dice game.
     """
-
     @staticmethod
     def calculate_score(dice):
         """
         Calculates the score based on the dice values.
-
         Args:
             dice (tuple): A tuple of dice values.
-
         Returns:
             int: The calculated score.
         """
-         
         score = 0
         counts = [0] * 7
-
         for die in dice:
             counts[die] += 1
-
         counter = 0
         for die in range(1, 7):
             if counts[die] == 1:
@@ -31,7 +23,6 @@ class GameLogic:
             if counter == 6:
                 score += 1500
                 return score
-
         counter = 0
         for die in range(1, 7):
             if counts[die] == 2:
@@ -42,58 +33,68 @@ class GameLogic:
         list_check=[2,3,4,6]
         count_check=0
         for x in list_check :
+<<<<<<< HEAD
             
             if counts[x]<3 :
                 count_check+= counts[x]
         
                
+=======
+            if counts[x]<3 :
+                count_check+= counts[x]
+>>>>>>> fa8d31964fa7a068a313aa9c8bf3af1c7427b2ec
         if counts[1] >= 3:
             score += (counts[1] - 2) * 1000
         elif counts[1] > 0:
             score += counts[1] * 100
-
         if counts[5] == 3:
             score += 500
             counts[5] = 0
-
         if 0 < counts[5] < 3:
             score += counts[5] * 50
             counts[5] = 0
-
         for die in range(2, 7):
             if counts[die] >= 3:
                 score += (counts[die] - 2) * 100 * die
                 counts[die] -= 3
+<<<<<<< HEAD
 
         return score ,count_check
 
+=======
+        return score ,count_check
+>>>>>>> fa8d31964fa7a068a313aa9c8bf3af1c7427b2ec
     @staticmethod
     def roll_dice(number_of_dice):
         """
         Rolls a specified number of dice and returns the values.
-
         Args:
             number_of_dice (int): The number of dice to roll.
-
         Returns:
             tuple: A tuple of dice values.
         """
-                
         dice_roll = []
         for _ in range(number_of_dice):
             dice_roll.append(random.randint(1, 6))
         return tuple(dice_roll)
+<<<<<<< HEAD
     
+=======
+>>>>>>> fa8d31964fa7a068a313aa9c8bf3af1c7427b2ec
     def validate_keepers(self,digits,roll_2,roll_str=0):
         check=1
         for x in digits :
             if x in roll_2 :
                 roll_2.remove(x)
+<<<<<<< HEAD
                 
+=======
+>>>>>>> fa8d31964fa7a068a313aa9c8bf3af1c7427b2ec
             else:
                 print("Cheater!!! Or possibly made a typo...")
                 check=-1
                 print(f"*** {roll_str} ***")
+<<<<<<< HEAD
                 return 
         if check ==1:
             return True
@@ -102,6 +103,13 @@ class GameLogic:
                             
 
 
+=======
+                return
+        if check ==1:
+            return True
+        else :
+            return False
+>>>>>>> fa8d31964fa7a068a313aa9c8bf3af1c7427b2ec
     """
     A class representing the gameplay logic for the Ten Thousand dice game.
     Inherits from the GameLogic class.
@@ -120,9 +128,14 @@ Available test file names:
 4)To run the code normally --> press Enter
 """
     )
+<<<<<<< HEAD
       
     def mock_roller(self,number_of_dice=6):
         rolls=[] 
+=======
+    def mock_roller(self,number_of_dice=6):
+        rolls=[]
+>>>>>>> fa8d31964fa7a068a313aa9c8bf3af1c7427b2ec
         return rolls.pop(0) if rolls else self.roll_dice(number_of_dice)
     def play_dice(self, roller=roll_dice):
         """
@@ -146,7 +159,10 @@ Available test file names:
             count="y"
         else:
             self.play_dice(self.mock_roller)
+<<<<<<< HEAD
             
+=======
+>>>>>>> fa8d31964fa7a068a313aa9c8bf3af1c7427b2ec
         while count=="y":
                 rounds += 1
                 print(f"Starting round {rounds}")
@@ -167,12 +183,20 @@ Available test file names:
                         break
                     elif num_dice==6 and self.calculate_score(roll)[0]==0:
                         print(f"Starting round {rounds}")
+<<<<<<< HEAD
                         print("Rolling 6 dice...")                        
                         roll = roller()
                         roll_str = " ".join(str(num) for num in roll)
                         print(f"*** {roll_str} ***")                        
                     else :
                            
+=======
+                        print("Rolling 6 dice...")
+                        roll = roller()
+                        roll_str = " ".join(str(num) for num in roll)
+                        print(f"*** {roll_str} ***")
+                    else :
+>>>>>>> fa8d31964fa7a068a313aa9c8bf3af1c7427b2ec
                         print("Enter dice to keep, or (q)uit:")
                         choice = input("> ")
                         if choice == "q":
@@ -182,7 +206,10 @@ Available test file names:
                             digits = list(int(digit) for digit in str(choice))
                             roll_2=list(roll)
                             check=1
+<<<<<<< HEAD
                             
+=======
+>>>>>>> fa8d31964fa7a068a313aa9c8bf3af1c7427b2ec
                             if self.validate_keepers(digits,roll_2,roll_str)==  True:
                                 dice = tuple(map(int, choice))
                                 score = self.calculate_score(dice)[0]
