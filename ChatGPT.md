@@ -313,3 +313,8 @@ This modified code simulates the game rounds, keeps track of the total score, an
 </br>
 
 ## \* Afterward, we analyzed and dissected the code, making modifications to align it with the test files. We also added docstrings and we also injected three questions to ask the user to enter the test he prefer to use.
+
+
+
+# Ten Thousand 3: 
+ we didnt use chat gpt 
