@@ -16,5 +16,10 @@
 
 #     test.mock_roller(rolls)
     
+<<<<<<< HEAD
 #     mock_rollerd=test.mock_roller(rolls)
 #     test.play_dice(mock_rollerd)
+=======
+    mock_rollerd=test.mock_roller(rolls)
+    test.play_dice(mock_rollerd)
+>>>>>>> 1b514f52897dcfe32e46b8687b8e29f05837d666

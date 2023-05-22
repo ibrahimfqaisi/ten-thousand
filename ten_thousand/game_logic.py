@@ -105,10 +105,14 @@ Available test file names:
 4)To run the code normally --> press Enter
 """
     )
+<<<<<<< HEAD
     def mock_roller(number_of_dice=6):
         return  test.roll_dice(number_of_dice)
     def play_dice(self, roller=mock_roller):
         
+=======
+    def play_dice(self, roller=roll_dice):
+>>>>>>> 1b514f52897dcfe32e46b8687b8e29f05837d666
         """
         Plays the Ten Thousand dice game.
         Args:
@@ -210,5 +214,14 @@ Available test file names:
                                         f"You banked {unbanked_points} points in round {rounds}"
                                     )
 if __name__ == "__main__":
+<<<<<<< HEAD
     
     GameLogic().play_dice()
+=======
+    test = GameLogic()
+    rolls=[]
+    def mock_roller(number_of_dice=6):
+        return rolls.pop(0) if rolls else test.roll_dice(number_of_dice)
+    mock_rollerd=test.mock_roller
+    test.play_dice(mock_rollerd)
+>>>>>>> 1b514f52897dcfe32e46b8687b8e29f05837d666
