@@ -13,8 +13,5 @@ if __name__ == "__main__":
     else:
         rolls=[]
     
-    def mock_roller(number_of_dice=6):
-        return rolls.pop(0) if rolls else test.roll_dice(number_of_dice)
-
-    mock_rollerd=test.mock_roller
+    mock_rollerd=test.mock_roller(rolls)
     test.play_dice(mock_rollerd)
