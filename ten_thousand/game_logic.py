@@ -206,3 +206,10 @@ Available test file names:
                                     print(
                                         f"You banked {unbanked_points} points in round {rounds}"
                                     )
+if __name__ == "__main__":
+    test = GameLogic()
+    rolls=[]
+    def mock_roller(number_of_dice=6):
+        return rolls.pop(0) if rolls else test.roll_dice(number_of_dice)
+    mock_rollerd=test.mock_roller
+    test.play_dice(mock_rollerd)
