@@ -52,4 +52,5 @@ class GameLogic:
         for _ in range(number_of_dice):
             dice_roll.append(random.randint(1, 6))
         return tuple(dice_roll)
+    
 
