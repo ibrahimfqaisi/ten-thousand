@@ -11,6 +11,7 @@
 ## How to initialize/run your application (where applicable)
 
 [game.py](/ten_thousand/game.py)
+[game_logic](/ten_thousand/game_logic.py)
 
 ## How to use your library (where applicable)
 

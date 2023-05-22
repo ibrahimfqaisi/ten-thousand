@@ -31,10 +31,11 @@ class GameLogic:
                 score += 1500
                 return score
         list_check=[2,3,4,6]
+        global count_check
         count_check=0
         for x in list_check :
             if counts[x]<3 :
-                count_check+= counts[x]
+                 count_check+= counts[x]
         if counts[1] >= 3:
             score += (counts[1] - 2) * 1000
         elif counts[1] > 0:
@@ -49,7 +50,11 @@ class GameLogic:
             if counts[die] >= 3:
                 score += (counts[die] - 2) * 100 * die
                 counts[die] -= 3
-        return score ,count_check
+        
+        return score 
+    def mock_roller(self,number_of_dice=6):
+        rolls=[]
+        return rolls.pop(0) if rolls else self.roll_dice(number_of_dice)
     @staticmethod
     def roll_dice(number_of_dice):
         """
@@ -59,12 +64,18 @@ class GameLogic:
         Returns:
             tuple: A tuple of dice values.
         """
+        
+
         dice_roll = []
+            
         for _ in range(number_of_dice):
             dice_roll.append(random.randint(1, 6))
         return tuple(dice_roll)
-    def validate_keepers(self,digits,roll_2,roll_str=0):
+    @staticmethod
+    def validate_keepers(roll_2,digits,roll_str=0):
         check=1
+        digits=list(digits)
+        roll_2=list(roll_2)
         for x in digits :
             if x in roll_2 :
                 roll_2.remove(x)
@@ -72,11 +83,10 @@ class GameLogic:
                 print("Cheater!!! Or possibly made a typo...")
                 check=-1
                 print(f"*** {roll_str} ***")
-                return
+                return False
         if check ==1:
             return True
-        else :
-            return False
+
     """
     A class representing the gameplay logic for the Ten Thousand dice game.
     Inherits from the GameLogic class.
@@ -95,10 +105,10 @@ Available test file names:
 4)To run the code normally --> press Enter
 """
     )
-    def mock_roller(self,number_of_dice=6):
-        rolls=[]
-        return rolls.pop(0) if rolls else self.roll_dice(number_of_dice)
-    def play_dice(self, roller=roll_dice):
+    def mock_roller(number_of_dice=6):
+        return  test.roll_dice(number_of_dice)
+    def play_dice(self, roller=mock_roller):
+        
         """
         Plays the Ten Thousand dice game.
         Args:
@@ -130,7 +140,7 @@ Available test file names:
                 unbanked_points = 0
                 num_dice = 6
                 while True:
-                    if num_dice!=6 and self.calculate_score(roll)[0]==0:
+                    if num_dice!=6 and self.calculate_score(roll)==0:
                         unbanked_points=0
                         print('''
 ****************************************
@@ -138,7 +148,7 @@ Available test file names:
 ****************************************''')
                         print(f"You banked {unbanked_points} points in round {rounds}")
                         break
-                    elif num_dice==6 and self.calculate_score(roll)[0]==0:
+                    elif num_dice==6 and self.calculate_score(roll)==0:
                         print(f"Starting round {rounds}")
                         print("Rolling 6 dice...")
                         roll = roller()
@@ -151,13 +161,13 @@ Available test file names:
                             print(f"\nThanks for playing. You earned {total_score} points")
                             return
                         else:
-                            digits = list(int(digit) for digit in str(choice))
-                            roll_2=list(roll)
+                            roll_2 = list(int(digit) for digit in str(choice))
+                            digits=list(roll)
                             check=1
                             if self.validate_keepers(digits,roll_2,roll_str)==  True:
                                 dice = tuple(map(int, choice))
-                                score = self.calculate_score(dice)[0]
-                                count_check = self.calculate_score(dice)[1]
+                                score = self.calculate_score(dice)
+                                
                                 if score==0:
                                     print(
                                         f"You have {unbanked_points} unbanked points and {num_dice} dice remaining"
@@ -199,3 +209,6 @@ Available test file names:
                                     print(
                                         f"You banked {unbanked_points} points in round {rounds}"
                                     )
+if __name__ == "__main__":
+    
+    GameLogic().play_dice()
