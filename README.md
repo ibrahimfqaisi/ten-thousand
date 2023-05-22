@@ -1,17 +1,21 @@
-# LAB - Class 06
-### Project: Ten Thousand - version 1
+# LAB - Class 07
+
+### Project: Ten Thousand 2
+
 ## Author:
- * ibrahim adnan
- * abdallah toughoj
- * Thekra Quran 
 
+- ibrahim adnan
+- abdallah toughoj
+- Thekra Quran
 
+## How to initialize/run your application (where applicable)
 
-## How to initialize/run your application (where applicable)  
-[game_logic.py](/ten_thousand/game_logic.py)
-    
+[game.py](/ten_thousand/game.py)
+
 ## How to use your library (where applicable)
+
     pip install -r requirements.txt
-## How do you run tests?
+
+## How do you run tests?oll
 
 pytest

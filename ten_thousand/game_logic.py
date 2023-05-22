@@ -2,8 +2,22 @@ import random
 
 
 class GameLogic:
+    """
+    A class representing game logic for a dice game.
+    """
+
     @staticmethod
     def calculate_score(dice):
+        """
+        Calculates the score based on the dice values.
+
+        Args:
+            dice (tuple): A tuple of dice values.
+
+        Returns:
+            int: The calculated score.
+        """
+         
         score = 0
         counts = [0] * 7
 
@@ -48,6 +62,16 @@ class GameLogic:
 
     @staticmethod
     def roll_dice(number_of_dice):
+        """
+        Rolls a specified number of dice and returns the values.
+
+        Args:
+            number_of_dice (int): The number of dice to roll.
+
+        Returns:
+            tuple: A tuple of dice values.
+        """
+                
         dice_roll = []
         for _ in range(number_of_dice):
             dice_roll.append(random.randint(1, 6))

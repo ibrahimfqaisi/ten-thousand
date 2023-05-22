@@ -1,7 +1,38 @@
 from game_logic import GameLogic
 
-class paly(GameLogic):
+class play(GameLogic):
+    """
+    A class representing the gameplay logic for the Ten Thousand dice game.
+    Inherits from the GameLogic class.
+    """
+
+    def print_welcome(self):
+        """
+        Prints the welcome message and available test file names.
+        """
+
+        print(
+"""
+Input the number of the test file you want to run or press Enter to proceed normally
+Available test file names:
+1)bank_first_for_two_rounds.sim --> input number 1
+2)bank_one_roll_then_quit.sim --> input number 2
+3)one_and_done.sim --> input number 3
+4)To run the code normally --> press Enter
+"""        
+    )
+
     def play_dice(self, roller=GameLogic.roll_dice):
+        """
+        Plays the Ten Thousand dice game.
+
+        Args:
+            roller (function): A function to roll the dice.
+
+        Returns:
+            None
+        """
+        
         rounds = 0
         total_score = 0
         print(
@@ -42,7 +73,6 @@ class paly(GameLogic):
                         dice = tuple(map(int, choice))
                         score = self.calculate_score(dice)
                         if score==0:
-                            unbanked_points += score
                             
                             print(
                                 f"You have {unbanked_points} unbanked points and {num_dice} dice remaining"
@@ -86,23 +116,15 @@ class paly(GameLogic):
 
 if __name__ == "__main__":
     
-    test = paly()
-    print(
-"""
-Input the name of the test file you want to run or press enter to proceed normaly
-Available test file names:
-1)bank_first_for_two_rounds.sim
-2)bank_one_roll_then_quit.sim
-3)one_and_done.sim
-"""        
-    )
+    test = play()
+    test.print_welcome()
     choice = input("> ")
 
-    if choice == "bank_first_for_two_rounds.sim":
+    if choice == "1":
         rolls = [(3, 2, 5, 4, 3, 3), (5, 2, 3, 2, 1, 4), (6, 6, 5, 4, 2, 1)] 
-    elif choice == "bank_one_roll_then_quit.sim":
+    elif choice == "2":
         rolls = [(4, 2, 6, 4, 6, 5), (6, 4, 5, 2, 3, 1)]
-    elif choice == "one_and_done.sim":
+    elif choice == "3":
         rolls = [(4, 4, 5, 2, 3, 1)]
     else:
         rolls=[]
