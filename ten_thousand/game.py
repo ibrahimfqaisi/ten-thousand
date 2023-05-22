@@ -49,7 +49,7 @@ Available test file names:
         else:
             test.play_dice(mock_roller)
             
-
+          
         while count=="y":
 
                 rounds += 1
@@ -61,57 +61,97 @@ Available test file names:
                 print(f"*** {roll_str} ***")
                 unbanked_points = 0
                 num_dice = 6
-
+                check_zilch=1
+                
                 while True:
+                    if check_zilch!=1 and self.calculate_score(roll)==0:
+                        print('''
+****************************************
+**        Zilch!!! Round over         **
+****************************************''')
+                        
+
+
+
                     print("Enter dice to keep, or (q)uit:")
                     choice = input("> ")
-
+                    
                     if choice == "q":
                         print(f"\nThanks for playing. You earned {total_score} points")
                         return
                     else:
-                        dice = tuple(map(int, choice))
-                        score = self.calculate_score(dice)
-                        if score==0:
+                        print(roll,"111") 
+                        print(choice,"222")
+                        digits = list(int(digit) for digit in str(choice))
+                        
+                        roll_2=list(roll)
+                        check=1
+                        for x in digits :
+                            if x in roll_2 :
+                                roll_2.remove(x)
+                            else:
+                                print("Cheater!!! Or possibly made a typo...")
+                                check=-1
+                                print(f"*** {roll_str} ***")
+                                break
+                        if check==1:
+                                
+                            dice = tuple(map(int, choice))
+                            score = self.calculate_score(dice)
+                            if score==0:
+                                
+                                print(
+                                    f"You have {unbanked_points} unbanked points and {num_dice} dice remaining"
+                                )
+                            else:    
+                                unbanked_points += score
+                                num_dice -= len(dice)
+                                print(
+                                    f"You have {unbanked_points} unbanked points and {num_dice} dice remaining"
+                                )
                             
-                            print(
-                                f"You have {unbanked_points} unbanked points and {num_dice} dice remaining"
-                            )
-                        else:    
-                            unbanked_points += score
-                            num_dice -= len(dice)
-                            print(
-                                f"You have {unbanked_points} unbanked points and {num_dice} dice remaining"
-                            )
+                            if num_dice > 0:
+                                print("(r)oll again, (b)ank your points or (q)uit:")
+                                choice = input("> ")
 
-                        if num_dice > 0:
-                            print("(r)oll again, (b)ank your points or (q)uit:")
-                            choice = input("> ")
+                                if choice == "b":
+                                    total_score += unbanked_points
+                                    print(
+                                        f"You banked {unbanked_points} points in round {rounds}"
+                                    )
+                                    print(f"Total score is {total_score} points")
+                                    break
+                                elif choice == "q":
+                                    print(
+                                        f"\nThanks for playing. You earned {total_score} points"
+                                    )
+                                    return
+                                else:
+                                    print("Rolling remaining dice...")
+                                    roll = roller(num_dice)
+                                    roll_str = " ".join(str(num) for num in roll)
+                                    print(f"*** {roll_str} ***")
+                            else:
+                                print(f"Starting round {rounds}")
+                                print("Rolling 6 dice...")
 
-                            if choice == "b":
-                                total_score += unbanked_points
+                                roll = roller()
+                                roll_str = " ".join(str(num) for num in roll)
+                                print(f"*** {roll_str} ***")
+                                
+                                num_dice = 6
+
+                                
                                 print(
                                     f"You banked {unbanked_points} points in round {rounds}"
                                 )
-                                print(f"Total score is {total_score} points")
-                                break
-                            elif choice == "q":
-                                print(
-                                    f"\nThanks for playing. You earned {total_score} points"
-                                )
-                                return
-                            else:
-                                print("Rolling remaining dice...")
-                                roll = roller(num_dice)
-                                roll_str = " ".join(str(num) for num in roll)
-                                print(f"*** {roll_str} ***")
-                        else:
-                            total_score += unbanked_points
-                            print(
-                                f"You banked {unbanked_points} points in round {rounds}"
-                            )
-                            print(f"Total score is {total_score} points")
-                            break
+                                
+                            
+                                    
+
+                            
+    
+                        
 
 
 if __name__ == "__main__":
@@ -121,13 +161,14 @@ if __name__ == "__main__":
     choice = input("> ")
 
     if choice == "1":
-        rolls = [(3, 2, 5, 4, 3, 3), (5, 2, 3, 2, 1, 4), (6, 6, 5, 4, 2, 1)] 
+        rolls = [(1, 1, 1, 1, 1, 1), (5, 2, 3, 2, 1, 4), (6, 6, 5, 4, 2, 1)] 
     elif choice == "2":
         rolls = [(4, 2, 6, 4, 6, 5), (6, 4, 5, 2, 3, 1)]
     elif choice == "3":
         rolls = [(4, 4, 5, 2, 3, 1)]
     else:
         rolls=[]
+    
     def mock_roller(number_of_dice=6):
         return rolls.pop(0) if rolls else test.roll_dice(number_of_dice)
 
