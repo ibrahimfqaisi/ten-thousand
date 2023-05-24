@@ -3,6 +3,19 @@ class GameLogic:
     """
     A class representing game logic for a dice game.
     """
+    def get_scorers(dice):
+            dice
+            list_check = [2, 3, 4, 6]
+            global count_check
+            count_check = 0
+            scorer=[]
+            for x in list_check:
+                if counts[x] < 3:
+                    count_check += counts[x]
+                else:
+                    for y in range(counts[x]):
+                        scorer.append(x)
+            return tuple(scorer)
     @staticmethod
     def calculate_score(dice):
         """
@@ -13,6 +26,7 @@ class GameLogic:
             int: The calculated score.
         """
         score = 0
+        global counts 
         counts = [0] * 7
         for die in dice:
             counts[die] += 1
@@ -30,12 +44,21 @@ class GameLogic:
             if counter == 3:
                 score += 1500
                 return score
+        
+        # def get_scorers(self,dice):
+            
         list_check = [2, 3, 4, 6]
         global count_check
         count_check = 0
+
         for x in list_check:
             if counts[x] < 3:
                 count_check += counts[x]
+            # else:
+            #         for x in range(counts[x]):
+            #             scorer.append(x)
+            # return tuple(scoyrer)
+        # get_scorers(dice)
         if counts[1] >= 3:
             score += (counts[1] - 2) * 1000
         elif counts[1] > 0:
@@ -55,6 +78,18 @@ class GameLogic:
         rolls = []
         return self.roll_dice(number_of_dice)
     @staticmethod
+    def quitOrBank(total_score,unbanked_points,rounds):
+        print("(r)oll again, (b)ank your points or (q)uit:")
+        choice = input("> ")
+        if choice == "b":
+            total_score += unbanked_points
+            print(f"You banked {unbanked_points} points in round {rounds}")
+            print(f"Total score is {total_score} points")
+            return "b"
+        elif choice == "q":
+            print(f"Thanks for playing. You earned {total_score} points")
+            return "q"
+    @staticmethod
     def roll_dice(number_of_dice):
         """
         Rolls a specified number of dice and returns the values.
@@ -72,30 +107,35 @@ class GameLogic:
         check = 1
         digits = list(digits)
         roll_2 = list(roll_2)
-        for x in digits:
-            if x in roll_2:
-                roll_2.remove(x)
-            else:
-                print("Cheater!!! Or possibly made a typo...")
-                check = -1
-                print(f"*** {roll_str} ***")
-                return False
-        if check == 1:
-            return True
-    def print_welcome(self):
-        """
-        Prints the welcome message and available test file names.
-        """
-        print(
-            """
-Input the number of the test file you want to run or press Enter to proceed normally
-Available test file names:
-1)bank_first_for_two_rounds.sim --> input number 1
-2)bank_one_roll_then_quit.sim --> input number 2
-3)one_and_done.sim --> input number 3
-4)To run the code normally --> press Enter
-"""
-        )
+        if digits ==[]:
+            print(f"*** {roll_str} ***")
+            return False
+        else:
+            for x in digits:
+                if x in roll_2:
+                    roll_2.remove(x)
+                else:
+                    print("Cheater!!! Or possibly made a typo...")
+                    check = -1
+                    print(f"*** {roll_str} ***")
+                    return False
+            if check == 1:
+                return True
+#     def print_welcome(self):
+#         """
+#         Prints the welcome message and available test file names.
+#         """
+#         print(
+#             """
+# Input the number of the test file you want to run or press Enter to proceed normally
+# Available test file names:
+# 1)bank_first_for_two_rounds.sim --> input number 1
+# 2)bank_one_roll_then_quit.sim --> input number 2
+# 3)one_and_done.sim --> input number 3
+# 4)To run the code normally --> press Enter
+# """
+#         )
+
     def play_dice(self, roller=None):
         """
         Plays the Ten Thousand dice game.
@@ -106,10 +146,8 @@ Available test file names:
         """
         rounds = 0
         total_score = 0
-        print(
-            """Welcome to Ten Thousand
-(y)es to play or (n)o to decline"""
-        )
+        print("Welcome to Ten Thousand")
+        print("(y)es to play or (n)o to decline")
         choice = input("> ")
         if choice == "n":
             print("OK. Maybe another time")
@@ -157,45 +195,37 @@ Available test file names:
                             dice = tuple(map(int, choice))
                             score = self.calculate_score(dice)
                             if score == 0:
-                                print(
-                                    f"You have {unbanked_points} unbanked points and {num_dice} dice remaining"
-                                )
+                                print(f"You have {unbanked_points} unbanked points and {num_dice} dice remaining")
                             else:
                                 unbanked_points += score
                                 num_dice -= len(dice)
                                 num_dice += count_check
-                                print(
-                                    f"You have {unbanked_points} unbanked points and {num_dice} dice remaining"
-                                )
+                                if num_dice !=0 :
+                                    
+                                    print(f"You have {unbanked_points} unbanked points and {num_dice} dice remaining")
                             if num_dice > 0:
-                                print("(r)oll again, (b)ank your points or (q)uit:")
-                                choice = input("> ")
-                                if choice == "b":
-                                    total_score += unbanked_points
-                                    print(
-                                        f"You banked {unbanked_points} points in round {rounds}"
-                                    )
-                                    print(f"Total score is {total_score} points")
+                                my_check=self.quitOrBank(total_score,unbanked_points,rounds)
+                                if my_check =="b":
                                     break
-                                elif choice == "q":
-                                    print(
-                                        f"\nThanks for playing. You earned {total_score} points"
-                                    )
+                                elif my_check =="q":
                                     return
+
                                 else:
                                     print(f"Rolling {num_dice} dice...")
                                     roll = self.roll_dice(num_dice)
                                     roll_str = " ".join(str(num) for num in roll)
                                     print(f"*** {roll_str} ***")
                             else:
-                                print(f"Starting round {rounds}")
+                                num_dice = 6
+                                print(f"You have {unbanked_points} unbanked points and {num_dice} dice remaining")
+                                my_check=self.quitOrBank(total_score,unbanked_points,rounds)
+                                if my_check =="b":
+                                    break
+                                elif my_check =="q":
+                                    return
                                 print("Rolling 6 dice...")
                                 roll = self.roll_dice(6)
                                 roll_str = " ".join(str(num) for num in roll)
                                 print(f"*** {roll_str} ***")
-                                num_dice = 6
-                                print(
-                                    f"You banked {unbanked_points} points in round {rounds}"
-                                )
 if __name__ == "__main__":
     GameLogic().play_dice()
