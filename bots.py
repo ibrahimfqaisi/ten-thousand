@@ -138,7 +138,7 @@ class NervousNellie(BaseBot):
 
 class YourBot(BaseBot):
     def _roll_bank_or_quit(self):
-        if self.unbanked_points>=500:
+        if self.unbanked_points>=1000:
             return "b"
         
         else:
