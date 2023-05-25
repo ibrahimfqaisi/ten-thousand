@@ -1,6 +1,6 @@
 # LAB - Class 08
 
-### Project: Ten Thousand 3
+### Project: Ten Thousand v4
 
 ## Author:
 
@@ -16,6 +16,8 @@
 
     pip install -r requirements.txt
 
-## How do you run tests?oll
+## How do you run botss?oll
 
-pytest
+- run :    ten-thousand/bots.py
+
+
