@@ -85,7 +85,7 @@ class BaseBot(ABC):
     def _enter_dice(self):
         """simulate user entering which dice to keep.
         Defaults to all scoring dice"""
-        
+
         roll = GameLogic.get_scorers(self.last_roll)
 
         roll_string = ""
