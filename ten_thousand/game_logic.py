@@ -87,6 +87,9 @@ class GameLogic:
             print(f"Total score is {total_score} points")
             
             return "b",total_score
+        elif choice == "r":
+            print(f"Thanks for playing. You earned {total_score} points")
+            return "r",total_score            
         elif choice == "q":
             print(f"Thanks for playing. You earned {total_score} points")
             return "q",total_score
