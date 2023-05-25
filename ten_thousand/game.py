@@ -7,8 +7,3 @@ class Game(GameLogic):
          GameLogic().play_dice()
    
     
-
-
-if __name__ == "__main__":
-    # play()
-    Game().play()
