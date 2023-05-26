@@ -134,16 +134,18 @@ class NervousNellie(BaseBot):
 
     def _roll_bank_or_quit(self):
         return "b"
+    
 
 
 class YourBot(BaseBot):
     def _roll_bank_or_quit(self):
-        if self.unbanked_points>=1000:
-            return "b"
-        
-        else:
+        """your logic here"""
+        if self.unbanked_points>=1000 or self.dice_remaining<=2:
+            
+         return "b"
+        else :
             return "r"
-        
+
     def _enter_dice(self):
         """simulate user entering which dice to keep.
         Defaults to all scoring dice"""

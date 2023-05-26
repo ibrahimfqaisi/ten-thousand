@@ -5,7 +5,6 @@ class GameLogic:
     """
     @staticmethod
     def get_scorers(dice):
-        # dice= tuple(dice)
         all_dice_score = GameLogic.calculate_score(dice)
         if all_dice_score == 0:
             return tuple()
@@ -85,10 +84,9 @@ class GameLogic:
             total_score += unbanked_points
             print(f"You banked {unbanked_points} points in round {rounds}")
             print(f"Total score is {total_score} points")
-            
+        
             return "b",total_score
         elif choice == "r":
-            print(f"Thanks for playing. You earned {total_score} points")
             return "r",total_score            
         elif choice == "q":
             print(f"Thanks for playing. You earned {total_score} points")
@@ -150,8 +148,8 @@ class GameLogic:
             return
         while count == "y":
             rounds += 1
-            if rounds ==2:
-                print(f"Thanks for playing. You earned {total_score} points")
+            # if rounds ==2:
+            #     print(f"Thanks for playing. You earned {total_score} points")
                 
             print(f"Starting round {rounds}")
             print("Rolling 6 dice...")
